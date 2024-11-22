@@ -22,7 +22,7 @@
         .bubble {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 50, 255, 0.7);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             cursor: pointer;
             animation: floatUp 5s linear infinite;
@@ -61,7 +61,7 @@
 
     function createBubble() {
         const bubble = document.createElement('div');
-        const size = Math.random() * 50 + 20; // Bubble size between 20 and 70px
+        const size = Math.random() * 50 + 40; // Bubble size between 40 and 90px
         const xPosition = Math.random() * window.innerWidth;
 
         bubble.classList.add('bubble');
