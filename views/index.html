@@ -15,17 +15,22 @@
             position: relative;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+            background: #121212; /* Dark background */
             overflow: hidden;
         }
 
         .bubble {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 50, 255, 0.7);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            background: linear-gradient(to bottom, #3fa9f5, #ffffff); /* Gradient blue to white */
+            box-shadow: 0 0 15px rgba(63, 169, 245, 0.8);
             cursor: pointer;
             animation: floatUp 5s linear infinite;
+            transition: transform 0.1s ease;
+        }
+
+        .bubble:active {
+            transform: scale(1.2);
         }
 
         @keyframes floatUp {
@@ -43,9 +48,13 @@
             position: absolute;
             top: 10px;
             right: 20px;
-            color: #333;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             font-size: 24px;
             font-weight: bold;
+            color: #ffffff; /* White text for contrast */
         }
     </style>
 </head>
@@ -59,6 +68,10 @@
     const scoreDisplay = document.getElementById('score');
     let score = 0;
 
+    // Sound effects
+    const popSound = new Audio('/audio.wav');
+    popSound.volume = 0.5;
+
     function createBubble() {
         const bubble = document.createElement('div');
         const size = Math.random() * 50 + 40; // Bubble size between 40 and 90px
@@ -71,6 +84,8 @@
 
         bubble.addEventListener('click', () => {
             bubble.remove();
+            popSound.currentTime = 0; // Reset sound for quick successive clicks
+            popSound.play();
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
         });
